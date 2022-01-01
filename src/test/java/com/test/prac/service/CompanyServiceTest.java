@@ -65,8 +65,10 @@ class CompanyServiceTest {
 		companyRepository.save(contract);
 		
 		Company result = companyRepository.findById(contract.getId()).get();
-		System.out.println(result.toString());
+		
+		//계약 정보가 잘 들어 갔는지 체킹
 		assertThat(result.getId()).isEqualTo(contract.getId());
+		//공급 정보도 같이 잘 들어갔는지 체크
 		assertThat(result.getSupplyList()).isEqualTo(contract.getSupplyList());
 	}
 	
@@ -74,19 +76,25 @@ class CompanyServiceTest {
 	@Test
 	@Transactional
 	public void updateContract() {
-		Company contractEntity = companyRepository.findById(1L).get();
+		//1. 데이터 입력
+		Company contract = Company.builder()
+											.lowestRate(0.5)
+											.companyName("오비")
+											.contractStatusCode(StatusCode.PROGRESS)
+											.build();
+		Supply supply = new Supply();
+		contract.addSupply(supply);
+		
+		companyRepository.save(contract);
+		
+		Company contractEntity = companyRepository.findById(contract.getId()).get();
 		Company originEntity = new Company();
 		
 		originEntity.setCompanyName(contractEntity.getCompanyName());
 		
-		System.out.println("최초 받아온 entity의 회사이름: "+originEntity.getCompanyName());
-		
 		contractEntity.setCompanyName("삼다수");
 		
 		Company result = companyRepository.findById(contractEntity.getId()).get();
-		
-		System.out.println("오리지널==> "+originEntity);
-		System.out.println("업데이트==> "+result);
 		
 		assertThat(result.getCompanyName()).isNotEqualTo(originEntity.getCompanyName());
 	}

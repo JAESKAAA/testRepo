@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.test.prac.domain.book.Book;
+import com.test.prac.domain.book.BookRepository;
 import com.test.prac.domain.supply.Supply;
+import com.test.prac.domain.supply.SupplyRepository;
 import com.test.prac.domain.supplyBook.SupplyBook;
 import com.test.prac.domain.supplyBook.SupplyBookRepository;
 import com.test.prac.handler.exception.CustomException;
@@ -18,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 public class SupplyBookService {
 
 	private final SupplyBookRepository supplyBookRepository;
+	private final BookRepository bookRepository;
+	private final SupplyRepository supplyRepository;
 	
 	//공급 도서 목록 조회 서비스
 	public List<SupplyBook> getSBList(){
@@ -42,9 +46,13 @@ public class SupplyBookService {
 	
 	//공급 도서 등록 서비스
 	@Transactional
-	public SupplyBook insertSupplyBook(SupplyBook supplyBook, long supplyId, long bookdId) {
-		Book book = Book.builder().id(bookdId).build();
-		Supply supply = Supply.builder().id(supplyId).build();
+	public SupplyBook insertSupplyBook(SupplyBook supplyBook, long supplyId, long bookId) {
+		//1. 책정보 호출
+		Book book = bookRepository.findById(bookId).orElseThrow(()-> new CustomException("해당 도서 정보를 찾을 수 없습니다."));
+		
+		//2. 공급정보 호출
+		Supply supply = supplyRepository.findById(supplyId).orElseThrow(()-> new CustomException("해당 공급 정보를 찾을 수 없습니다."));
+		
 		supplyBook.setBook(book);
 		supplyBook.setSupply(supply);
 		

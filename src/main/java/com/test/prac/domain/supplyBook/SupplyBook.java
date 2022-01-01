@@ -2,8 +2,6 @@ package com.test.prac.domain.supplyBook;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,15 +20,13 @@ import com.test.prac.domain.supply.Supply;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Table(
 		uniqueConstraints = {
@@ -52,7 +48,7 @@ public class SupplyBook {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SB_SEQ_GENERATOR")
 	private Long id;
 	
-	@JsonIgnoreProperties({"supplyBookList"})
+	@JsonIgnoreProperties({"supplyBookList", "companyId"})
 	@JoinColumn(name = "supplyId")
 	@ManyToOne
 	private Supply supply;
@@ -63,18 +59,11 @@ public class SupplyBook {
 	private Book book;
 
 	
-	private LocalDate contractDate; //공급 도서 등록날짜
+	private LocalDate supplyBookEnrollDate; //공급 도서 등록날짜
 
 	@PrePersist 
 	public void createDate() {
 		
-		this.contractDate = LocalDate.now();
+		this.supplyBookEnrollDate = LocalDate.now();
 	}
-	
-	@Override
-	public String toString() {
-		return "SupplyBook [id=" + id + "]";
-	}
-	
-	
 }

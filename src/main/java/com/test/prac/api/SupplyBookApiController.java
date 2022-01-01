@@ -26,26 +26,30 @@ public class SupplyBookApiController {
 	
 	//공급 도서 목록 조회
 	@GetMapping("/supplybook")
-	public List<SupplyBook> showSBList(){
-		return supplyBookService.getSBList();
+	public CommonResponseDto<?> showSBList(){
+		List<SupplyBook> list = supplyBookService.getSBList();
+		return new CommonResponseDto<>("공급 도서 목록 조회 결과", list);
 	}
 	
 	//공급 번호별 공급도서 조회
 	@GetMapping("/supplybook/supply/{supplyId}")
-	public List<SupplyBook> showSbListForSupply(@PathVariable long supplyId){
-		return supplyBookService.getSBSupplyList(supplyId);
+	public CommonResponseDto<?> showSbListForSupply(@PathVariable long supplyId){
+		List<SupplyBook> list = supplyBookService.getSBSupplyList(supplyId);
+		return new CommonResponseDto<>("공급 번호 별 공급 도서 조회 결과", list);
 	}
 	
 	//도서 번호별 공급도서 조회
 	@GetMapping("/supplybook/book/{bookId}")
-	public List<SupplyBook> showSBListForBook(@PathVariable long bookId){
-		return supplyBookService.getSBBookList(bookId);
+	public CommonResponseDto<?> showSBListForBook(@PathVariable long bookId){
+		List<SupplyBook> list = supplyBookService.getSBBookList(bookId);
+		return new CommonResponseDto<>("도서 번호 별 공급 도서 조회 결과", list); 
 	}
 	
 	//특정 공급 도서 조회
 	@GetMapping("/supplybook/{supplyBookId}")
-	public SupplyBook showSB(@PathVariable long supplyBookId) {
-		return supplyBookService.getSB(supplyBookId);
+	public CommonResponseDto<?> showSB(@PathVariable long supplyBookId) {
+		SupplyBook SBook = supplyBookService.getSB(supplyBookId);
+		return new CommonResponseDto<>("요청하신 공급 도서 조회 결과", SBook); 
 	}
 	
 	//공급 도서 등록 (bookId, supplyId 각각 long타입 으로 받기)

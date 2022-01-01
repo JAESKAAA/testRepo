@@ -30,8 +30,10 @@ class BookServiceTest {
 	
 	//특정 도서 조회 테스트
 	@Test
+	@Transactional
 	public void getBookTest() {
-		Book book = bookRepository.findById(1L).get();
+		long bookId = 1;
+		Book book = bookRepository.findById(bookId).get();
 		System.out.println("조회된 책==> "+book);
 	}
 	
@@ -53,7 +55,6 @@ class BookServiceTest {
 		bookRepository.save(book);
 		
 		Book result = bookRepository.findById(book.getId()).get();
-		System.out.println(result.toString());
 		assertThat(result.getId()).isEqualTo(book.getId());
 	}
 	
@@ -61,21 +62,33 @@ class BookServiceTest {
 	@Test
 	@Transactional
 	public void updateBookTest() {
-		Book bookEntity = bookRepository.findById(1L).get();
+		
+		//1. 데이터 입력
+		Book book = new Book();
+		book.setBookTitle("개미");
+		book.setBookType(BookType.NOVEL);
+		book.setQuantity(100);
+		book.setSupplyPrice("35000");
+		book.setWriter("베르나르베르베르");
+		book.setPublicationDate(LocalDate.of(2001, 1, 3));
+		book.setOriginPrice("40000");
+		book.setDiscountRate(0.1);
+		
+		bookRepository.save(book);
+		
+		//2. 비교 대상을 위한 새로운 데이터 생성
 		Book originEntity = new Book();
 		
-		//타이틀 변경 되었는지 확인 하기 위해, 최초 받아온 bookEntity title 넣어줌
-		originEntity.setBookTitle(bookEntity.getBookTitle());
+		//3. 최초 데이터의 정보를 해당 변수에 저장
+		originEntity.setBookTitle(book.getBookTitle());
 		
+		//4. 최초 데이터 정보를 수정 후 더티 체킹하여 DB 입력될 수 있도록 기대
+		book.setBookTitle("데이터수정");
 		
-		System.out.println("오리지날 위에서 찍은거 --> "+originEntity.toString());
-
-		bookEntity.setBookTitle("개미 수정");
+		//5. 최초 등록했던 데이터의 id를 매개로 다시 엔티티를 받아옴
+		Book result = bookRepository.findById(book.getId()).get();
 		
-		Book result = bookRepository.findById(1L).get();
-		System.out.println("오리지널:==> "+originEntity.toString());
-		System.out.println("업데이트:==> "+result.toString());
-		
+		//6. 최초 데이터와 다를 것을 기대
 		assertThat(result.getBookTitle()).isNotEqualTo(originEntity.getBookTitle());
 	}
 	

@@ -1,10 +1,8 @@
 package com.test.prac.domain.book;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.test.prac.domain.supplyBook.SupplyBook;
 
 import lombok.AllArgsConstructor;
@@ -54,6 +53,7 @@ public class Book {
 	private String originPrice; //정가
 	private Double discountRate; //적용할인율
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	private List<SupplyBook> supplyBookList;
 	

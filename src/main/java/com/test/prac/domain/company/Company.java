@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.test.prac.domain.supply.Supply;
 
 import lombok.AllArgsConstructor;
@@ -54,7 +53,7 @@ public class Company {
 	private StatusCode contractStatusCode; //계약상태코드
 	
 	@Builder.Default
-	@OneToMany(mappedBy = "companyId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "contractInfo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Supply> supplyList = new ArrayList<>();
 	
 	@PrePersist 
@@ -65,7 +64,7 @@ public class Company {
 	
 	public void addSupply(Supply supply) {
 			this.getSupplyList().add(supply);
-			supply.setCompanyId(this);
+			supply.setContractInfo(this);
 	}
-	
+
 }

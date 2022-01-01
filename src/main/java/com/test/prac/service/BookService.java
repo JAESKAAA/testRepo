@@ -19,7 +19,7 @@ public class BookService {
 	
 	//조회 서비스
 	public List<Book> getBookList(){
-		return bookRepository.findAll();
+			return bookRepository.findAll();
 	}
 	
 	//특정 책만 조회하는 서비스

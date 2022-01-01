@@ -30,14 +30,17 @@ public class BookApiContoller {
 	
 	//도서 내역 조회
 	@GetMapping("/book")
-	public List<Book> showBookList(){
-		return bookService.getBookList();
+	public CommonResponseDto<?> showBookList(){
+		List<Book> listEntity = bookService.getBookList();
+		return new CommonResponseDto<>("도서 정보 조회 결과", listEntity);
 	}
 	
 	//특정 도서 조회
 	@GetMapping("/book/{bookId}")
-	public Book showBook(@PathVariable long bookId) {
-		return bookService.getBook(bookId);
+	public CommonResponseDto<?> showBook(@PathVariable long bookId) {
+		
+		Book bookEntity = bookService.getBook(bookId);
+		return new CommonResponseDto<>("도서 정보 조회 결과", bookEntity);
 	}
 	
 	//도서 등록
@@ -64,5 +67,4 @@ public class BookApiContoller {
 		Book bookEntity = bookService.updateBook(bookId,bookDto.toEntity());
 			return new CommonResponseDto<>("도서 정보 수정 완료", bookEntity);
 	}
-	
 }

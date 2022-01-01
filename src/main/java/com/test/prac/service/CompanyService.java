@@ -21,7 +21,7 @@ public class CompanyService {
 
 	//계약 업체 조회 서비스
 	public List<Company> getCompanyList(){
-		return companyRepository.findAllCompanyList();
+			return companyRepository.findAllCompanyList();
 	}
 	
 	//특정 계약업체의 계약 정보 조회 서비스

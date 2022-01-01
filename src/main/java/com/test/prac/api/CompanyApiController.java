@@ -31,26 +31,30 @@ public class CompanyApiController {
 	
 	//계약업체 목록 조회
 	@GetMapping("/company")
-	public List<Company> showCompanyList(){
-		return companyService.getCompanyList();
+	public CommonResponseDto<?> showCompanyList(){
+		List<Company> list = companyService.getCompanyList();
+		return new CommonResponseDto<>("계약업체 조회 결과", list);
 	}
 	
 	//특정 계약업체의 계약 정보 목록 조회
 	@GetMapping("/company/contract/{companyName}")
-	public List<Company> showCompanyContractList(@PathVariable String companyName){
-		return companyService.getCCList(companyName);
+	public CommonResponseDto<?> showCompanyContractList(@PathVariable String companyName){
+		List<Company> list = companyService.getCCList(companyName);
+		return new CommonResponseDto<>("계약업체 조회 결과", list);
 	}
 	
 	//계약 리스트 조회
 	@GetMapping("/company/contract")
-	public List<Company> showContractList(){
-		return companyService.getContractList();
+	public CommonResponseDto<?> showContractList(){
+		List<Company>list = companyService.getContractList();
+		return new CommonResponseDto<>("계약 리스트 조회 결과", list);
 	}
 	
 	//특정 계약 정보 조회
 	@GetMapping("/company/{companyId}")
-	public Company showContract(@PathVariable long companyId) {
-		return companyService.getContract(companyId);
+	public CommonResponseDto<?> showContract(@PathVariable long companyId) {
+		Company company = companyService.getContract(companyId);
+		return new CommonResponseDto<>("계약 정보 조회 결과", company);
 	}
 	
 	//계약 등록
