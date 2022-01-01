@@ -23,6 +23,7 @@
 + 사용자 명 : sa
 + 패스워드 : 없음(공란)
 + 기타 : 최초 application 실행 후 데이터 저장을 위해 application.yml에서 ddl.auto를 update로 수정 필요
++ <strong>(DB먼저 구동 후 Application 실행 부탁드립니다 !)</strong>
 
 <br/>
 
