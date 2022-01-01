@@ -45,7 +45,7 @@
 <img src="https://user-images.githubusercontent.com/78363202/147852641-5b86a010-778d-467e-96de-8c860031944c.JPG?raw=true" width=50% height=50%/>
 
 
-#### 테스트 및 자세한 API 설명은 Application 실행 후 http://localhost:8080/swagger-ui.html에서 확인 부탁드립니다!
+#### 테스트 및 자세한 API 설명은 Application 실행 후 http://localhost:8080/swagger-ui.html 에서 확인 부탁드립니다!
 
 <br/>
 
