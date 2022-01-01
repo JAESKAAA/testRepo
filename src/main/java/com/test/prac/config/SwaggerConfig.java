@@ -11,15 +11,20 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+
+/*
+ * [Swagger 설정파일]
+ * 
+ * API 문서화를 위한 Swagger 설정
+ * 
+ * */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig  {
-
-	
 	
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("JPA 구현 테스트")
+                .title("API 구현 테스트")
                 .description("API Description")
                 .build();
     }
