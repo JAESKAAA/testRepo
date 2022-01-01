@@ -1,6 +1,5 @@
 package com.test.prac.domain.book;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,6 +16,7 @@ import javax.persistence.SequenceGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.test.prac.domain.supplyBook.SupplyBook;
 
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,9 +47,10 @@ public class Book {
 	
 	@Column(nullable = false)
 	private long quantity;  //수량
+    
 	private String supplyPrice; //공급단가
 	private String writer; //저자
-	private LocalDate publicationDate; //발행일
+	private String publicationDate; //발행일
 	private String originPrice; //정가
 	private Double discountRate; //적용할인율
 	

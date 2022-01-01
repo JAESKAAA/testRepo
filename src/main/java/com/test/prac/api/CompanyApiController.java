@@ -18,6 +18,7 @@ import com.test.prac.dto.company.CompanyDto;
 import com.test.prac.service.CompanyService;
 import com.test.prac.util.Validator;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -29,35 +30,35 @@ public class CompanyApiController {
 	private final Validator validator;
 
 	
-	//계약업체 목록 조회
+	@ApiOperation(value="계약업체 리스트", notes ="계약 업체(company) 리스트 출력")
 	@GetMapping("/company")
 	public CommonResponseDto<?> showCompanyList(){
 		List<Company> list = companyService.getCompanyList();
 		return new CommonResponseDto<>("계약업체 조회 결과", list);
 	}
 	
-	//특정 계약업체의 계약 정보 목록 조회
+	@ApiOperation(value="특정 업체의 계약 정보 리스트", notes ="업체명에 따른 계약 리스트 조회")
 	@GetMapping("/company/contract/{companyName}")
 	public CommonResponseDto<?> showCompanyContractList(@PathVariable String companyName){
 		List<Company> list = companyService.getCCList(companyName);
 		return new CommonResponseDto<>("계약업체 조회 결과", list);
 	}
 	
-	//계약 리스트 조회
+	@ApiOperation(value="계약 리스트", notes ="계약(contract) 리스트 조회")
 	@GetMapping("/company/contract")
 	public CommonResponseDto<?> showContractList(){
 		List<Company>list = companyService.getContractList();
 		return new CommonResponseDto<>("계약 리스트 조회 결과", list);
 	}
 	
-	//특정 계약 정보 조회
+	@ApiOperation(value="계약 조회", notes ="특정 계약 정보 조회")
 	@GetMapping("/company/{companyId}")
 	public CommonResponseDto<?> showContract(@PathVariable long companyId) {
 		Company company = companyService.getContract(companyId);
 		return new CommonResponseDto<>("계약 정보 조회 결과", company);
 	}
 	
-	//계약 등록
+	@ApiOperation(value="계약 등록", notes ="신규 계약 등록")
 	@PostMapping("/company")
 	public CommonResponseDto<?> enrollContract(@Valid CompanyDto companyDto,
 											BindingResult bindingResult){
@@ -68,7 +69,7 @@ public class CompanyApiController {
 		return new CommonResponseDto<>("계약 등록 완료",companyEntity);
 	}
 	
-	//계약 정보 수정
+	@ApiOperation(value="계약 정보 수정", notes ="특정 계약 정보 수정")
 	@PutMapping("/company/{companyId}")
 	public CommonResponseDto<?> modifyContract(
 												@PathVariable long companyId,

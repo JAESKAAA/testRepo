@@ -19,6 +19,7 @@ import javax.persistence.SequenceGenerator;
 
 import com.test.prac.domain.supply.Supply;
 
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

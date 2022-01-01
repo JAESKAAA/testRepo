@@ -18,6 +18,7 @@ import com.test.prac.dto.book.BookDto;
 import com.test.prac.service.BookService;
 import com.test.prac.util.Validator;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -28,14 +29,14 @@ public class BookApiContoller {
 	private final BookService bookService;
 	private final Validator validator;
 	
-	//도서 내역 조회
+	@ApiOperation(value="도서 리스트", notes ="도서 리스트 출력")
 	@GetMapping("/book")
 	public CommonResponseDto<?> showBookList(){
 		List<Book> listEntity = bookService.getBookList();
 		return new CommonResponseDto<>("도서 정보 조회 결과", listEntity);
 	}
 	
-	//특정 도서 조회
+	@ApiOperation(value="도서 정보", notes ="특정 도서 정보 출력")
 	@GetMapping("/book/{bookId}")
 	public CommonResponseDto<?> showBook(@PathVariable long bookId) {
 		
@@ -43,7 +44,7 @@ public class BookApiContoller {
 		return new CommonResponseDto<>("도서 정보 조회 결과", bookEntity);
 	}
 	
-	//도서 등록
+	@ApiOperation(value="도서 등록", notes ="신규 도서 등록")
 	@PostMapping("/book")
 	public CommonResponseDto<?> enrollBook(@Valid BookDto bookDto, BindingResult bindingResult) {
 		
@@ -54,7 +55,7 @@ public class BookApiContoller {
 			return new CommonResponseDto<>("도서 등록 완료",bookEntity);
 	}
 	
-	//도서 정보 수정
+	@ApiOperation(value="도서 정보 수정", notes ="특정 도서 정보 수정")
 	@PutMapping("/book/{bookId}")
 	public CommonResponseDto<?> modifyBook(
 											@PathVariable long bookId,

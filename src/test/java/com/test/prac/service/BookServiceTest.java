@@ -48,7 +48,7 @@ class BookServiceTest {
 		book.setQuantity(100);
 		book.setSupplyPrice("35000");
 		book.setWriter("베르나르베르베르");
-		book.setPublicationDate(LocalDate.of(2001, 1, 3));
+		book.setPublicationDate("2001-01-30");
 		book.setOriginPrice("40000");
 		book.setDiscountRate(0.1);
 		
@@ -70,7 +70,7 @@ class BookServiceTest {
 		book.setQuantity(100);
 		book.setSupplyPrice("35000");
 		book.setWriter("베르나르베르베르");
-		book.setPublicationDate(LocalDate.of(2001, 1, 3));
+		book.setPublicationDate("2001-01-30");
 		book.setOriginPrice("40000");
 		book.setDiscountRate(0.1);
 		

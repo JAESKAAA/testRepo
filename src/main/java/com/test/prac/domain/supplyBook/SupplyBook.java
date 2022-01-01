@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.test.prac.domain.book.Book;
 import com.test.prac.domain.supply.Supply;
 
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -52,7 +53,7 @@ public class SupplyBook {
 	@JoinColumn(name = "supplyId")
 	@ManyToOne
 	private Supply supply;
-	
+
 	@JsonIgnoreProperties({"supplyBookList"})
 	@JoinColumn(name = "bookId")
 	@ManyToOne(fetch = FetchType.EAGER)
