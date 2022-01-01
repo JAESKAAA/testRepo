@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.test.prac.domain.book.Book;
 import com.test.prac.domain.book.BookRepository;
-import com.test.prac.dto.book.BookDto;
 import com.test.prac.handler.exception.CustomException;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,8 @@ public class BookService {
 	
 	//특정 책만 조회하는 서비스
 	public Book getBook(long bookId) {
-		return bookRepository.findById(bookId).orElseThrow(()-> new CustomException("해당 책 정보를 찾을 수 없습니다."));
+		return bookRepository.findById(bookId).orElseThrow(
+				()-> new CustomException("해당 책 정보를 찾을 수 없습니다."));
 	}
 	
 	//책 등록 서비스
@@ -35,6 +35,7 @@ public class BookService {
 		return bookEntity;
 	}
 	
+	//책 정보 수정 서비스
 	@Transactional
 	public Book updateBook(long bookId, Book book) {
 		// 1. 도서 정보 조회
